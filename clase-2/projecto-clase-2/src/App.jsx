@@ -1,17 +1,21 @@
-import './App.css'
-
-function App() { 
-   
-  return (
+import React from "react";
+import CharacterCard from "./components/CharacterCard";
+import "./App.css";
+import foto1 from "./assets/rick.jpg";
+import foto2 from "./assets/morthhy.jpg";
+import foto3 from "./assets/rick_malo.jpg";
+import foto4 from "./assets/tony.jpg";
+function App(){
+  return(
     <>
-     <div className='container'>  
-        <div className='description'>
-          <p>La película comienza con la pareja Charlie y Nicole Barber, quienes deciden asistir a terapia de pareja después de varios años de matrimonio. El proceso de terapia en pareja es una herramienta efectiva para ayudar a las parejas a resolver conflictos, mejorar la comunicación y fortalecer la relación.</p>
-          <p style={{color:'red'}}>!!GANADORA AL OSCAR¡¡</p>
-        </div>
-     </div>
+    <h1>Personajes de rick y morthy</h1>
+    <div className="container">
+      <CharacterCard url={foto1} titulo="Rick Sanchez" genero="masculino" estado="vivo"/>
+      <CharacterCard url={foto2} titulo="morthy Smith " genero="masculino" estado="vivo"/>
+      <CharacterCard url={foto3} titulo="Rick Prime " genero="masculino" estado="muerto"/>
+      <CharacterCard url={foto4} titulo="tony " genero="masculino" estado="muerto"/>
+    </div>
     </>
-  )
+  ) 
 }
-
-export default App
+export default App;
