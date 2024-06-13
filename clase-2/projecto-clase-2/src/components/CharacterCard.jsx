@@ -8,9 +8,9 @@ function CharacterCard({url,titulo, genero, estado}){
     return(
         <>
         <div className="Newcard">
-            <ComponenteImg url={url}/>
+            <ComponenteImg url={url}/> 
             <div className="info">
-                <ComponenteDeta estado={estado}/>
+                <ComponenteDeta estado={estado}/>  
                 <ComponenteTitu titulo={titulo}/>
                 <ComponenteDeta genero={genero}/>
             </div>

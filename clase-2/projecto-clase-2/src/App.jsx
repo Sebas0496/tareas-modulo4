@@ -1,21 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CharacterCard from "./components/CharacterCard";
 import "./App.css";
-import foto1 from "./assets/rick.jpg";
-import foto2 from "./assets/morthhy.jpg";
-import foto3 from "./assets/rick_malo.jpg";
-import foto4 from "./assets/tony.jpg";
-function App(){
-  return(
+
+function App() {
+  const [personajes, setPersonajes] = useState([]);
+  const [pagina, setPaginar] = useState(0);
+
+  useEffect(() => {
+    fetch(`https://rickandmortyapi.com/api/character/?page=${pagina}`)
+      .then((res) => res.json())
+      .then((data) => setPersonajes(data.results))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, [pagina]);
+  console.log(personajes);
+
+
+
+  return (
     <>
-    <h1>Personajes de rick y morthy</h1>
-    <div className="container">
-      <CharacterCard url={foto1} titulo="Rick Sanchez" genero="masculino" estado="vivo"/>
-      <CharacterCard url={foto2} titulo="morthy Smith " genero="masculino" estado="vivo"/>
-      <CharacterCard url={foto3} titulo="Rick Prime " genero="masculino" estado="muerto"/>
-      <CharacterCard url={foto4} titulo="tony " genero="masculino" estado="muerto"/>
-    </div>
+      <h1 className="titulo">Personajes de Rick y Morty pagina {pagina}</h1>
+      <div className="container">
+        {personajes.length !== 0 && personajes.map((personaje) => (
+          <CharacterCard key={personaje.id} url={personaje.image} titulo={personaje.name} estado={personaje.status} genero={personaje.gender} />
+        ))}
+        <button onClick={() => setPaginar(pagina + 1)}>Pagina</button>
+        <button onClick={() => setPaginar(pagina - 1)}>Devolver</button>
+      </div>
     </>
-  ) 
+  );
 }
+
 export default App;
