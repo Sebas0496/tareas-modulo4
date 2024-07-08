@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import CardComponent from './components/CardComponent';
-import Img from './assets/thebest.jpg';
-import Img2 from './assets/messi.jpg';
-import Img3 from './assets/kyliam.jpg';
 import './App.css';
 
 function App() {
+  const rickAndMortyCharacterId = 1;
+  const [personaje, setpersonaje] = useState();
+
+  useEffect(() => {
+    fetch("https://rickandmortyapi.com/api/character/" + rickAndMortyCharacterId)
+      .then(response => response.json())
+      .then(data => {
+        setpersonaje(data);
+        console.log(data)
+      })
+  }, [])
+
+  const imagen = personaje ? personaje.image : '';
+
   return (
-    <div className="Container">
-      <CardComponent titulo="Cristiano Ronaldo" url={Img} genero="masculino" estado="Vivo" />
-      <CardComponent titulo="Leonel Messi" url={Img2} genero="masculino" estado="Vivo" />
-      <CardComponent titulo="Kyliam mbappe" url={Img3} genero="masculino" estado="Vivo" />
-    </div>
+    <>
+      {personaje ? (
+        <CardComponent titulo={personaje.name} url={imagen} genero={personaje.gender} estado={personaje.status}></CardComponent>
+      ) :
+        (<p>cargando</p>)
+      }
+    </>
   );
 }
 
