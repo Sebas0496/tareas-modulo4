@@ -4,26 +4,31 @@ import './App.css';
 
 function App() {
   const rickAndMortyCharacterId = 1;
-  const [personaje, setpersonaje] = useState();
+  const [charactersList, setcharactersList] = useState([]);
 
   useEffect(() => {
-    fetch("https://rickandmortyapi.com/api/character/" + rickAndMortyCharacterId)
+    fetch("https://rickandmortyapi.com/api/character/?page=1")
       .then(response => response.json())
       .then(data => {
-        setpersonaje(data);
-        console.log(data)
+        setcharactersList(data.results);
+        console.log(data.results)
       })
   }, [])
 
-  const imagen = personaje ? personaje.image : '';
-
   return (
     <>
-      {personaje ? (
-        <CardComponent titulo={personaje.name} url={imagen} genero={personaje.gender} estado={personaje.status}></CardComponent>
-      ) :
-        (<p>cargando</p>)
-      }
+      <div className="Container">
+        {charactersList.map((character) => (
+          <CardComponent
+            key={character.id}
+            titulo={character.name}
+            url={character.image}
+            genero={character.gender}
+            estado={character.status}></CardComponent>
+        ))
+
+        }
+      </div>
     </>
   );
 }
