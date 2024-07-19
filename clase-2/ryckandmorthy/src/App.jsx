@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import CharacterPage from "./components/pages/CharacterPage";
-import EpisodesPage from "./components/pages/EpisodesPage";
+import EpisodesPage from "./components/pages/EpisodesPage"; 
 import NotFound from "./components/pages/404";
 import './App.css'
 
 function App() {
-
+    
   return (
     <Router>
       <nav>
